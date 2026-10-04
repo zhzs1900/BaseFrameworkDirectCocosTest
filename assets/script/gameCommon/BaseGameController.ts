@@ -3,7 +3,6 @@ import { rewardedVideoAd } from '../framework/ad/RewardedVideoAdService';
 import { baseGameConfig } from '../config/baseGameConfig';
 import { GameStorage } from '../framework/core/GameStorage';
 import { sidebarService } from '../framework/ad/SidebarService';
-import { interstitialAd } from '../framework/ad/InterstitialAdService';
 import { openAbilityService } from '../framework/ad/OpenAbilityService';
 
 const { ccclass } = _decorator;
@@ -12,9 +11,6 @@ const { ccclass } = _decorator;
 export enum BaseGameState {
   Boot = 'boot',                   // 初始启动/加载中
   Cover = 'cover',                 // 封面页（比如首屏过渡）
-  Lobby = 'lobby',                 // 游戏大厅/选关
-  SpriteGallery = 'sprite-gallery', // 图鉴/皮肤/收集界面
-  MainMenu = 'main-menu',           // 主菜单
   Playing = 'playing',             // 游戏中/核心玩法进行中
   Paused = 'paused',               // 游戏暂停
   GameOver = 'game-over',           // 游戏失败结算
@@ -33,18 +29,12 @@ export abstract class BaseGameController extends Component {
   // 侧边栏服务入口（快捷跳转）
   protected readonly sidebar = sidebarService;
   
-  // 插屏广告服务
-  protected readonly interstitialAd = interstitialAd;
-  
   // 平台开放能力（如添加桌面、录屏分享等）
   protected readonly openAbilities = openAbilityService;
   
   // 当前所处的游戏状态，默认是 Boot
   protected state: BaseGameState = BaseGameState.Boot;
   
-  // 累计运行时间（秒）
-  protected elapsedTime = 0;
-
   // 组件挂载时先初始化基础公共服务，再进入自定义启动逻辑
   start() {
     // 提前初始化激励广告，避免后续调用时 SDK 还没准备好
@@ -54,8 +44,6 @@ export abstract class BaseGameController extends Component {
 
   // 帧循环处理
   update(dt: number) {
-    this.elapsedTime += dt;
-    
     // 不管处于什么状态，每帧都会跑的逻辑（比如公共倒计时、粒子刷新等）
     this.onUpdateAlways(dt);
 

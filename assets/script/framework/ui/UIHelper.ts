@@ -1,7 +1,7 @@
-import { Color, Graphics, Label, LabelOutline, Node, resources, Sprite, SpriteFrame, UITransform } from 'cc';
+import { Color, Label, LabelOutline, Node, resources, Sprite, SpriteFrame, UITransform } from 'cc';
 
 // Cocos UI 底层构建工具类
-// 只提供与具体皮肤无关的基础节点装配能力，专门供各类 UI 皮肤实现（如 PuzzleStorySkin）调用
+// 提供文本和图片节点装配，供 GameUI 调用
 export class UIHelper {
   // 快捷创建一个居中对齐的文本节点
   static createText(
@@ -32,56 +32,8 @@ export class UIHelper {
     return node;
   }
 
-  // 使用 Graphics 绘制带立体层次感的圆角底板（支持投影、暗部、描边与顶部微高光）
-  static drawRoundedSurface(
-    node: Node,
-    width: number,
-    height: number,
-    fill: Color,
-    radius: number,
-    line: Color,
-  ) {
-    node.addComponent(UITransform).setContentSize(width, height);
-    const graphics = node.addComponent(Graphics);
-
-    // 1. 绘制底层半透明深褐色投影（向右下偏移），营造悬浮立体感
-    graphics.fillColor = new Color(74, 48, 30, 70);
-    graphics.roundRect(-width / 2 + 3, -height / 2 - 5, width, height, radius);
-    graphics.fill();
-
-    // 2. 绘制主体圆角矩形底色
-    graphics.fillColor = fill;
-    graphics.roundRect(-width / 2, -height / 2, width, height, radius);
-    graphics.fill();
-
-    // 3. 在下半部分叠一层偏暗的半透明阴影，做出按钮/面板的厚重质感
-    graphics.fillColor = new Color(
-      Math.max(0, fill.r - 22),
-      Math.max(0, fill.g - 22),
-      Math.max(0, fill.b - 22),
-      Math.min(fill.a, 72),
-    );
-    graphics.roundRect(-width / 2 + 2, -height / 2 + 2, width - 4, height * 0.46, Math.max(4, radius - 2));
-    graphics.fill();
-
-    // 4. 绘制外轮廓边框
-    graphics.strokeColor = line;
-    graphics.lineWidth = 2;
-    graphics.roundRect(-width / 2, -height / 2, width, height, radius);
-    graphics.stroke();
-
-    // 5. 在顶部边缘画一条细细的半透明白色高光横线，突出边缘反光效果
-    graphics.strokeColor = new Color(255, 255, 255, 105);
-    graphics.lineWidth = 1;
-    graphics.moveTo(-width / 2 + radius, height / 2 - 3);
-    graphics.lineTo(width / 2 - radius, height / 2 - 3);
-    graphics.stroke();
-
-    return graphics;
-  }
-
   // 异步加载 resources 目录下的 SpriteFrame 并创建图片节点
-  static createImage(name: string, path: string, width: number, height: number) {
+  static createImage(name: string, path: string, width: number, height: number, contain = false) {
     const node = new Node(name);
     node.addComponent(UITransform).setContentSize(width, height);
     const sprite = node.addComponent(Sprite);
@@ -91,6 +43,11 @@ export class UIHelper {
     resources.load(`${path}/spriteFrame`, SpriteFrame, (error, frame) => {
       if (!error && frame && node.isValid) {
         sprite.spriteFrame = frame;
+        if (contain) {
+          const original = frame.originalSize;
+          const scale = Math.min(width / original.width, height / original.height);
+          node.getComponent(UITransform)!.setContentSize(original.width * scale, original.height * scale);
+        }
       } else if (error) {
         console.warn(`[UIHelper] Failed to load image: ${path}`, error);
       }
