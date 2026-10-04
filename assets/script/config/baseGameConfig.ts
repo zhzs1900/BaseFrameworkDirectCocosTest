@@ -10,7 +10,7 @@ export const baseGameConfig = {
   /** React 基础框架的调试入口及关卡总数。 */
   debug: true,
   /** 封面设置中“秘籍”的 DEBUG 入口密码，只使用数字 0–9。 */
-  debugPassword: '888888',
+  debugPassword: '08',
   totalLevels: 8,
   /** 本地存储的键名前缀 */
   storageKeyPrefix: 'save_game',

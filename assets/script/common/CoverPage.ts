@@ -24,9 +24,6 @@ export class CoverPage {
       ui.text(stage, '抵制不良游戏，拒绝盗版游戏。\n注意自我保护，谨防上当受骗。\n适度游戏益脑，沉迷游戏伤身。\n合理安排时间，享受健康生活。', 0, -558, 21);
     }
     ui.button(stage, '', 300, 580, 64, 64, () => this.showSettings(), 'icons/icon-2');
-    if (sidebarService.isSupported()) {
-      ui.button(stage, '侧边栏', -270, -420, 140, 52, () => this.showSidebar(), 'buttons/btn_dark');
-    }
   }
 
   private changeLevel(delta: number) {
