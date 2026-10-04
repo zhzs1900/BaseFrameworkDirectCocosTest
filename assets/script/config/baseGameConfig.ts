@@ -7,8 +7,8 @@ export const baseGameConfig = {
   gameTitle: '游戏名称测试',
   /** 封面是否显示健康游戏忠告，默认 false 不显示 */
   showAdvice: true,
-  /** React 基础框架的调试入口及关卡总数。 */
-  debug: true,
+  /** 基础框架的调试入口及关卡总数。 */
+  debug: false,
   /** 封面设置中“秘籍”的 DEBUG 入口密码，只使用数字 0–9。 */
   debugPassword: '08',
   totalLevels: 8,
