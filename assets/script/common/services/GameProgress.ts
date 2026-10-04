@@ -1,6 +1,8 @@
 import { baseGameConfig } from '../../config/baseGameConfig';
 import { GameStorage } from '../../framework/core/GameStorage';
 
+export type GameResult = 'victory' | 'failure';
+
 /** 正常选关受解锁进度限制，调试选关只改变当前关卡。 */
 export class GameProgress {
   level = 1;

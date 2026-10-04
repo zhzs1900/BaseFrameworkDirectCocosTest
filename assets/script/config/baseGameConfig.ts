@@ -4,11 +4,13 @@
  */
 export const baseGameConfig = {
   /** 游戏标题，配了之后封面就会展示，留空或不填则不显示 */
-  gameTitle: '游戏名称测试1',
+  gameTitle: '游戏名称测试',
   /** 封面是否显示健康游戏忠告，默认 false 不显示 */
   showAdvice: true,
   /** React 基础框架的调试入口及关卡总数。 */
   debug: true,
+  /** 封面设置中“秘籍”的 DEBUG 入口密码，只使用数字 0–9。 */
+  debugPassword: '888888',
   totalLevels: 8,
   /** 本地存储的键名前缀 */
   storageKeyPrefix: 'save_game',
