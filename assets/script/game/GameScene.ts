@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Color, Component, Graphics, Node } from 'cc';
 import { GameUI } from '../framework/ui/GameUI';
 import { rewardedAdGameService } from '../common/services/RewardedAdGameService';
 import type { GameResult } from '../common/services/GameProgress';
@@ -18,8 +18,14 @@ export class GameScene extends Component {
     const gameplay = ui.node(this.node, 'GameplayRoot', 720, 1280);
     this.renderGameplay(gameplay, level);
     ui.button(this.node, '', 300, 580, 64, 64, onMenu, 'icons/icon-1');
-    ui.button(this.node, '观看广告', 0, -500, 260, 70,
+    const adButton = ui.button(this.node, '观看广告', 0, -500, 260, 70,
       () => { void rewardedAdGameService.show('play-button'); }, 'buttons/btn_gold', 'icons/icon-4');
+    const badge = ui.node(adButton, 'AdBadge', 42, 24, 110, 28);
+    const graphics = badge.addComponent(Graphics);
+    graphics.fillColor = new Color(69, 35, 10);
+    graphics.roundRect(-21, -12, 42, 24, 6);
+    graphics.fill();
+    ui.text(badge, 'AD', 0, 0, 16, 38, new Color(255, 240, 185));
   }
 
   /** 在这里创建关卡节点或挂载玩法组件。 */

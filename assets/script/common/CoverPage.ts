@@ -1,4 +1,4 @@
-import { Color, Node } from 'cc';
+import { Color, LabelOutline, Node, tween, Vec3 } from 'cc';
 import { baseGameConfig } from '../config/baseGameConfig';
 import { GameUI } from '../framework/ui/GameUI';
 import { GameDialogs } from './GameDialogs';
@@ -15,7 +15,7 @@ export class CoverPage {
   render(stage: Node) {
     const { ui, progress } = this;
     ui.image(stage, 'coverpage', 720, 1280);
-    ui.text(stage, baseGameConfig.gameTitle, 0, 384, 60, 660, new Color(253, 230, 138));
+    this.renderTitle(stage);
     ui.button(stage, '', -265, -265, 80, 80, () => this.changeLevel(-1), 'icons/icon-12', undefined, progress.level > 1);
     ui.button(stage, `第${progress.level}关`, 0, -265, 400, 100, this.onStart, 'buttons/btn_gold', 'icons/icon-4');
     ui.button(stage, '', 265, -265, 80, 80, () => this.changeLevel(1), 'icons/icon-13', undefined, progress.level < progress.unlockedLevel);
@@ -24,6 +24,40 @@ export class CoverPage {
       ui.text(stage, '抵制不良游戏，拒绝盗版游戏。\n注意自我保护，谨防上当受骗。\n适度游戏益脑，沉迷游戏伤身。\n合理安排时间，享受健康生活。', 0, -558, 21);
     }
     ui.button(stage, '', 300, 580, 64, 64, () => this.showSettings(), 'icons/icon-2');
+  }
+
+  private renderTitle(stage: Node) {
+    const title = this.ui.node(stage, 'CoverTitle', 660, 100, 0, 384);
+    const layers = [
+      { x: 7, y: -13, fill: new Color(12, 8, 24, 90), edge: new Color(12, 8, 24, 90), width: 11 },
+      { x: 5, y: -10, fill: new Color(20, 10, 32, 220), edge: new Color(20, 10, 32, 220), width: 6 },
+      { x: 0, y: -5, fill: new Color(164, 76, 16), edge: new Color(74, 32, 18), width: 6 },
+      { x: 0, y: 2, fill: new Color(255, 250, 216), edge: new Color(255, 237, 169), width: 2 },
+      { x: 0, y: 0, fill: new Color(255, 211, 76), edge: new Color(132, 65, 17), width: 2 },
+    ];
+    const characters = Array.from(baseGameConfig.gameTitle);
+    const fontSize = Math.min(68, 560 / Math.max(1, characters.length));
+    const spacing = fontSize * 1.12;
+    characters.forEach((character, index) => {
+      const x = (index - (characters.length - 1) / 2) * spacing;
+      const y = index % 2 === 0 ? 5 : -5;
+      const letter = this.ui.node(title, `TitleChar${index}`, fontSize * 1.5, 110, x, y);
+      letter.angle = index % 2 === 0 ? -7 : 6;
+      layers.forEach(layer => {
+        const text = this.ui.text(letter, character, layer.x, layer.y, fontSize, fontSize * 1.5, layer.fill);
+        const outline = text.addComponent(LabelOutline);
+        outline.color = layer.edge;
+        outline.width = layer.width;
+      });
+      tween(letter)
+        .delay(index * 0.12)
+        .then(tween(letter)
+          .to(0.65, { position: new Vec3(x, y + 8, 0) }, { easing: 'sineInOut' })
+          .to(0.65, { position: new Vec3(x, y, 0) }, { easing: 'sineInOut' })
+          .union()
+          .repeatForever())
+        .start();
+    });
   }
 
   private changeLevel(delta: number) {
