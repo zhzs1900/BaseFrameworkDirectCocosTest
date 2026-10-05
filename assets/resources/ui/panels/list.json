@@ -1,0 +1,30 @@
+[
+  {
+    "useName": "badge_common",
+    "fileName": "badge_common.png"
+  },
+  {
+    "useName": "card_common",
+    "fileName": "card_common.png"
+  },
+  {
+    "useName": "medallion_common",
+    "fileName": "medallion_common.png"
+  },
+  {
+    "useName": "panel_common",
+    "fileName": "panel_common.png"
+  },
+  {
+    "useName": "panel_levels",
+    "fileName": "panel_levels.png"
+  },
+  {
+    "useName": "panel_tip",
+    "fileName": "panel_tip.png"
+  },
+  {
+    "useName": "panels_1",
+    "fileName": "panels_1.png"
+  }
+]

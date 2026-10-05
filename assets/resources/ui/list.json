@@ -1,0 +1,18 @@
+[
+  {
+    "useName": "background",
+    "fileName": "background.jpg"
+  },
+  {
+    "useName": "coverpage",
+    "fileName": "coverpage.jpg"
+  },
+  {
+    "useName": "icon",
+    "fileName": "icon.png"
+  },
+  {
+    "useName": "ui_1",
+    "fileName": "ui_1.png"
+  }
+]

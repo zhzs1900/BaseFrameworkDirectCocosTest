@@ -1,0 +1,30 @@
+[
+  {
+    "useName": "btn_back",
+    "fileName": "btn_back.png"
+  },
+  {
+    "useName": "btn_dark",
+    "fileName": "btn_dark.png"
+  },
+  {
+    "useName": "btn_debug",
+    "fileName": "btn_debug.png"
+  },
+  {
+    "useName": "btn_gold",
+    "fileName": "btn_gold.png"
+  },
+  {
+    "useName": "buttons_1",
+    "fileName": "buttons_1.png"
+  },
+  {
+    "useName": "card_stage",
+    "fileName": "card_stage.png"
+  },
+  {
+    "useName": "card_stage_on",
+    "fileName": "card_stage_on.png"
+  }
+]
