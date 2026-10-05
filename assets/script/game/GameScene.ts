@@ -10,9 +10,11 @@ const { ccclass } = _decorator;
 export class GameScene extends Component {
   level = 1;
   private onFinish!: (result: GameResult) => void;
+  private finished = false;
 
   initialize(ui: GameUI, level: number, onFinish: (result: GameResult) => void, onMenu: () => void) {
     this.level = level;
+    this.finished = false;
     this.onFinish = onFinish;
     ui.image(this.node, 'background', 720, 1280);
     const gameplay = ui.node(this.node, 'GameplayRoot', 720, 1280);
@@ -33,6 +35,8 @@ export class GameScene extends Component {
 
   /** 玩法结束时调用，结算和进度保存由公共流程处理。 */
   finishGame(result: GameResult) {
+    if (this.finished || !this.node.activeInHierarchy) { return; }
+    this.finished = true;
     this.onFinish(result);
   }
 }

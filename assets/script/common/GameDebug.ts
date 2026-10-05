@@ -13,7 +13,7 @@ export class GameDebug {
 
   render(stage: Node) {
     if (baseGameConfig.debug) {
-      this.ui.button(stage, 'DEBUG', 260, -605, 180, 44, () => this.showMenu(), 'buttons/btn_debug', 'icons/icon-14');
+      return this.ui.button(stage, 'DEBUG', 260, -605, 180, 44, () => this.showMenu(), 'buttons/btn_debug', 'icons/icon-14');
     }
   }
 
@@ -79,12 +79,16 @@ export class GameDebug {
 
   private showLevels() {
     const body = this.openModal('选择关卡', 1120);
-    const panelHeight = Math.ceil(this.progress.totalLevels / 2) * 165 + 20;
-    const panelY = 430 - panelHeight / 2;
-    const panel = this.ui.image(body, 'panels/panel_levels', 560, panelHeight, 0, panelY);
+    const viewport = this.ui.node(body, 'LevelsViewport', 560, 800, 0, 30);
+    viewport.addComponent(Mask);
+    const scroll = viewport.addComponent(ScrollView);
+    scroll.horizontal = false;
+    const panelHeight = Math.max(800, Math.ceil(this.progress.totalLevels / 2) * 165 + 20);
+    const panel = this.ui.image(viewport, 'panels/panel_levels', 560, panelHeight, 0, 400 - panelHeight / 2);
+    scroll.content = panel;
     for (let level = 1; level <= this.progress.totalLevels; level += 1) {
       const index = level - 1;
-      this.ui.button(panel, `STAGE\n${level}`, index % 2 === 0 ? -140 : 140, 350 - Math.floor(index / 2) * 165 - panelY,
+      this.ui.button(panel, `STAGE\n${level}`, index % 2 === 0 ? -140 : 140, panelHeight / 2 - 90 - Math.floor(index / 2) * 165,
         250, 140, () => this.showPlay(level), level === this.progress.level ? 'buttons/card_stage_on' : 'buttons/card_stage');
     }
     const tip = this.ui.image(body, 'panels/panel_tip', 340, 44, 0, -430);

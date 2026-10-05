@@ -17,9 +17,10 @@ export class GameDialogs {
   attach(stage: Node) { this.stage = stage; }
 
   open(title: string, height = 760) {
-    this.close();
-    this.resumeState = this.getState();
-    if (this.resumeState === BaseGameState.Playing) { this.setState(BaseGameState.Paused); }
+    const resumeState = this.resumeState ?? this.getState();
+    this.modal?.close();
+    this.resumeState = resumeState;
+    if (this.getState() === BaseGameState.Playing) { this.setState(BaseGameState.Paused); }
     this.modal = this.ui.modal(this.stage, title, height);
     this.ui.button(this.modal.body, '', 280, height / 2 - 15, 56, 56, () => this.close(), 'icons/icon-3');
     return this.modal.body;
@@ -60,7 +61,10 @@ export class GameDialogs {
   }
 
   dismissOnBackground() {
-    this.modal!.overlay.on(Node.EventType.TOUCH_END, () => this.close());
+    const overlay = this.modal!.overlay;
+    overlay.on(Node.EventType.TOUCH_END, event => {
+      if (event.target === overlay) { this.close(); }
+    });
   }
 
   notice(source: Node, message: string) {

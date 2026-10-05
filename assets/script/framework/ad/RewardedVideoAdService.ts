@@ -58,7 +58,7 @@ class RewardedVideoAdService {
   // 用户完整看完返回 true，中途关闭或失败返回 false
   async show(placement: string): Promise<boolean> {
     // 防止并发重复拉起
-    if (this.currentShowPromise) { return this.currentShowPromise; }
+    if (this.currentShowPromise) { return false; }
 
     const promise = this.showInternal(placement);
     this.currentShowPromise = promise;
@@ -142,8 +142,8 @@ class RewardedVideoAdService {
         if (settled) { return; }
         settled = true;
         cleanup();
-        // isEnded 为 true 或某些低版本没有该字段时默认发奖
-        resolve(result === undefined || result.isEnded === true);
+        // 只有明确完整观看才发奖，缺少结果时不推断成功。
+        resolve(result?.isEnded === true);
       };
 
       // 广告播放中途报错

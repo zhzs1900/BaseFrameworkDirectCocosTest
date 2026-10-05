@@ -1,0 +1,70 @@
+{
+  "type": "merge_pic",
+  "result": {
+    "fileName": "buttons_1.png",
+    "directory": "assets\\resources\\ui\\buttons",
+    "path": "assets\\resources\\ui\\buttons\\buttons_1.png",
+    "type": "png",
+    "resolution": {
+      "width": 940,
+      "height": 270
+    }
+  },
+  "moveSources": false,
+  "sources": [
+    {
+      "index": 1,
+      "name": "card_stage.png",
+      "directory": "assets\\resources\\ui\\buttons",
+      "x": 0,
+      "y": 0,
+      "width": 250,
+      "height": 150
+    },
+    {
+      "index": 2,
+      "name": "card_stage_on.png",
+      "directory": "assets\\resources\\ui\\buttons",
+      "x": 260,
+      "y": 0,
+      "width": 250,
+      "height": 150
+    },
+    {
+      "index": 3,
+      "name": "btn_gold.png",
+      "directory": "assets\\resources\\ui\\buttons",
+      "x": 520,
+      "y": 0,
+      "width": 420,
+      "height": 110
+    },
+    {
+      "index": 4,
+      "name": "btn_dark.png",
+      "directory": "assets\\resources\\ui\\buttons",
+      "x": 0,
+      "y": 160,
+      "width": 420,
+      "height": 110
+    },
+    {
+      "index": 5,
+      "name": "btn_back.png",
+      "directory": "assets\\resources\\ui\\buttons",
+      "x": 430,
+      "y": 160,
+      "width": 200,
+      "height": 76
+    },
+    {
+      "index": 6,
+      "name": "btn_debug.png",
+      "directory": "assets\\resources\\ui\\buttons",
+      "x": 640,
+      "y": 160,
+      "width": 200,
+      "height": 68
+    }
+  ]
+}

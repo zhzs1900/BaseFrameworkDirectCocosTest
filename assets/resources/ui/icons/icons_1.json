@@ -1,0 +1,205 @@
+{
+  "type": "merge_pic",
+  "result": {
+    "fileName": "icons_1.png",
+    "directory": "assets\\resources\\ui\\icons",
+    "path": "assets\\resources\\ui\\icons\\icons_1.png",
+    "type": "png",
+    "resolution": {
+      "width": 798,
+      "height": 528
+    }
+  },
+  "moveSources": false,
+  "sources": [
+    {
+      "index": 1,
+      "name": "icon_trophy.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 0,
+      "y": 0,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "index": 2,
+      "name": "icon_levels.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 202,
+      "y": 0,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "index": 3,
+      "name": "icon_gallery.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 404,
+      "y": 0,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "index": 4,
+      "name": "icon_events.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 606,
+      "y": 0,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "index": 5,
+      "name": "icon-16.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 0,
+      "y": 202,
+      "width": 72,
+      "height": 71
+    },
+    {
+      "index": 6,
+      "name": "icon-14.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 82,
+      "y": 202,
+      "width": 71,
+      "height": 71
+    },
+    {
+      "index": 7,
+      "name": "icon-15.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 163,
+      "y": 202,
+      "width": 69,
+      "height": 72
+    },
+    {
+      "index": 8,
+      "name": "icon-5.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 242,
+      "y": 202,
+      "width": 72,
+      "height": 64
+    },
+    {
+      "index": 9,
+      "name": "icon-2.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 0,
+      "y": 284,
+      "width": 70,
+      "height": 65
+    },
+    {
+      "index": 10,
+      "name": "icon-6.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 80,
+      "y": 284,
+      "width": 67,
+      "height": 65
+    },
+    {
+      "index": 11,
+      "name": "icon-8.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 157,
+      "y": 284,
+      "width": 68,
+      "height": 64
+    },
+    {
+      "index": 12,
+      "name": "icon-9.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 235,
+      "y": 284,
+      "width": 69,
+      "height": 60
+    },
+    {
+      "index": 13,
+      "name": "icon-7.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 0,
+      "y": 359,
+      "width": 61,
+      "height": 65
+    },
+    {
+      "index": 14,
+      "name": "icon-11.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 71,
+      "y": 359,
+      "width": 62,
+      "height": 63
+    },
+    {
+      "index": 15,
+      "name": "icon-13.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 143,
+      "y": 359,
+      "width": 67,
+      "height": 58
+    },
+    {
+      "index": 16,
+      "name": "icon-12.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 220,
+      "y": 359,
+      "width": 67,
+      "height": 58
+    },
+    {
+      "index": 17,
+      "name": "icon-3.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 0,
+      "y": 434,
+      "width": 63,
+      "height": 61
+    },
+    {
+      "index": 18,
+      "name": "icon-10.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 73,
+      "y": 434,
+      "width": 56,
+      "height": 62
+    },
+    {
+      "index": 19,
+      "name": "icon-4.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 139,
+      "y": 434,
+      "width": 54,
+      "height": 64
+    },
+    {
+      "index": 20,
+      "name": "icon-1.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 203,
+      "y": 434,
+      "width": 55,
+      "height": 59
+    },
+    {
+      "index": 21,
+      "name": "indicator_debug.png",
+      "directory": "assets\\resources\\ui\\icons",
+      "x": 0,
+      "y": 508,
+      "width": 20,
+      "height": 20
+    }
+  ]
+}

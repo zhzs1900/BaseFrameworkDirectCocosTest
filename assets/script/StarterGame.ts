@@ -19,6 +19,7 @@ export class StarterGame extends BasePageGameController {
   private audio!: GameAudio;
   private ui!: GameUI;
   private debug!: GameDebug;
+  private debugButton: Node | null = null;
   private gameScene: GameScene | null = null;
   private stage!: Node;
   private cover!: CoverPage;
@@ -53,8 +54,8 @@ export class StarterGame extends BasePageGameController {
   }
 
   private createStage(name: string) {
-    this.dialogs.close();
     this.gameScene = null;
+    this.dialogs.close();
     const root = this.createPage(name);
     this.stage = this.ui.stage(root, view.getVisibleSize());
     this.dialogs.attach(this.stage);
@@ -66,17 +67,20 @@ export class StarterGame extends BasePageGameController {
     const stage = this.createStage('CoverPage');
     this.setState(BaseGameState.Cover);
     this.cover.render(stage);
-    this.debug.render(stage);
+    this.debugButton = this.debug.render(stage) ?? null;
   }
 
   protected showPlay(level = this.progress.level) {
     if (!this.progress.select(level, true)) { return; }
     const stage = this.createStage('PlayPage');
     this.setState(BaseGameState.Playing);
-    this.gameScene = stage.addComponent(GameScene);
-    this.gameScene.initialize(this.ui, level, result => this.finishGame(result),
+    const scene = stage.addComponent(GameScene);
+    this.gameScene = scene;
+    scene.initialize(this.ui, level, result => {
+      if (this.gameScene === scene && scene.isValid && scene.node.activeInHierarchy) { this.finishGame(result); }
+    },
       () => this.dialogs.showGameMenu(() => this.showCover()));
-    this.debug.render(stage);
+    this.debugButton = this.debug.render(stage) ?? null;
   }
 
   protected onEnterState(_previous: BaseGameState, next: BaseGameState) {
@@ -85,11 +89,13 @@ export class StarterGame extends BasePageGameController {
 
   /** 玩法完成时调用；调试菜单复用相同结算流程。 */
   public finishGame(result: GameResult) {
+    if (this.getState() === BaseGameState.Victory || this.getState() === BaseGameState.GameOver) { return; }
     if (!this.gameScene) { this.showPlay(); }
-    this.dialogs.close();
     const victory = result === 'victory';
-    if (victory) { this.progress.win(); }
     this.setState(victory ? BaseGameState.Victory : BaseGameState.GameOver);
+    this.dialogs.close();
+    if (victory) { this.progress.win(); }
+    if (this.debugButton?.isValid) { this.debugButton.active = false; }
     this.dialogs.showResult(result, this.progress.level, this.progress.totalLevels,
       () => this.showPlay(this.progress.level + (victory ? 1 : 0)), () => this.showCover());
   }

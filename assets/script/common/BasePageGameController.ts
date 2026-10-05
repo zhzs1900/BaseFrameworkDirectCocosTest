@@ -14,7 +14,10 @@ export abstract class BasePageGameController extends BaseGameController {
 
   /** 创建并切换全屏页面；玩法页、结算页等均可复用。 */
   protected createPage(name: string) {
-    this.pageRoot?.destroy();
+    if (this.pageRoot) {
+      this.pageRoot.active = false;
+      this.pageRoot.destroy();
+    }
 
     const size = view.getVisibleSize();
     const root = new Node(name);

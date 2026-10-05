@@ -7,6 +7,7 @@ export interface SidebarLaunchInfo {
 
 // 抖音小游戏侧边栏原生 API 接口定义
 interface SidebarApi {
+  getLaunchOptionsSync?(): SidebarLaunchInfo;
   onShow(callback: (info: SidebarLaunchInfo) => void): void;
   checkScene(options: {
     scene: 'sidebar';
@@ -39,6 +40,8 @@ class SidebarService {
     const tt = this.getApi();
     if (!tt) { return; }
 
+    this.latestLaunch = tt.getLaunchOptionsSync?.() ?? null;
+
     // 尽早监听 onShow，获取冷启动或热启动传过来的场景参数
     tt.onShow((info) => {
       this.latestLaunch = info || null;
@@ -68,7 +71,7 @@ class SidebarService {
   isLaunchedFromSidebar(): boolean {
     const info = this.latestLaunch;
     return !!info && (
-      `${info.scene ?? ''}` === '021036'
+      Number(info.scene) === 21036
       || (info.launch_from === 'homepage' && info.location === 'sidebar_card')
     );
   }

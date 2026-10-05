@@ -77,7 +77,7 @@ export class CoverPage {
         void openAbilityService.requestSubscribeMessage().then(result => this.dialogs.notice(body, result.message));
       });
     }
-    this.ui.button(body, '秘籍', 230, -365, 100, 40, this.onCheat, 'buttons/btn_dark');
+    this.ui.button(body, '兑换', 230, -365, 100, 40, this.onCheat, 'buttons/btn_dark');
   }
 
   private showSidebar() {
